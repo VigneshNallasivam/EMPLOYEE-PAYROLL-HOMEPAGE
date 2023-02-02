@@ -28,8 +28,10 @@ const createInnerHtml = () => {
     <td>${empPayrollData._startDate}</td>
     <td>
         <img name="${empPayrollData._id}" onclick="remove(this)" alt="delete" src="Bin.jpg" width="30px">
+        <a href="Dashboard.html" onclick="update">
         <img name="${empPayrollData._id}" onclick="update(this)" alt="edit" src="Edit.png" width="30px">
-    </td>
+       </a>
+        </td>
 </tr>
 `;
     }
@@ -51,4 +53,14 @@ const remove = (node) => {
     localStorage.setItem("EmployeePayrollList", JSON.stringify(empPayrollList));
     document.querySelector(".emp-count").textContent = empPayrollList.length;
     createInnerHtml();
+}
+
+const update = (node) => {
+    let empPayrollData = empPayrollList.find(empData => empData._id == node.id);
+    if (empPayrollData) {
+        localStorage.setItem('editEmp', JSON.stringify(empPayrollData));
+        return;
+    } else {
+        return;
+    }
 }
